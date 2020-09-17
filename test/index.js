@@ -1,5 +1,5 @@
 const assert = require('assert');
-const {multipartIterator} = require('../multipart-iterator');
+const {multipartIterator} = require('../async-multipart-iterator');
 const boundary = 'separator'
 
 function toCRLF(s) {
