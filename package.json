@@ -2,7 +2,7 @@
   "name": "async-multipart-iterator",
   "version": "1.0.0",
   "description": "Iterate over the parts of a multipart document",
-  "main": "multipart-iterator.js",
+  "main": "async-multipart-iterator.js",
   "scripts": {
     "test": "mocha test",
     "test-debug": "mocha --inspect-brk test"
