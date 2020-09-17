@@ -102,3 +102,6 @@ dist
 
 # TernJS port file
 .tern-port
+
+# reserve a namespace for files not to be published
+my/
