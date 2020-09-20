@@ -48,7 +48,6 @@ module.exports.parseMultipart = async function* parseMultipart(boundary, input) 
              * @returns the number of false yields needed.
              */
             function readTail() {
-                debugger
                 if (cursor > end - 2) {
                     // need to read another check before checking the tail of the boundary
                     needTail = true;
