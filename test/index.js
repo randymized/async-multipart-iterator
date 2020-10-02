@@ -52,6 +52,8 @@ part 3 has no header!
 --separator--
 `);
 
+const chunkedDoc = baseDoc.replace(/--separator/g,'|--separator').split('|')
+
 const expectedHeaders = baseHeaders;
 const expectedBodies = baseBodies.map(s => s.replace(/\n/g, "\r\n"))
 
@@ -95,6 +97,47 @@ describe('Multipart iterator', async function () {
       chunks.push(baseDoc.substr(i,chunksize))
     }
     await testBaseDocument(chunks);
+  });
+  it('should parse the basic document, where there is a chunk break just before the "--" of each boundary', async function () {
+    const testcase = chunkedDoc;
+    await testBaseDocument(testcase);
+  });
+  for (let i= 0; i<15; i++) {
+    it(`should parse the basic document, where the chunk split is ${i} chars into the boundary`, async function () {
+      const t = Array.from(chunkedDoc);
+      if (i != 0) {
+        t[0] = t[0]+t[1].substr(0,i);
+        for (let j= 1; j<t.length-1; j++) {
+          t[j] = t[j].substr(i) + t[j+1].substr(0,i);
+        }
+        t[t.length-1] = t[t.length-1].substr(i);
+      }
+      await testBaseDocument(t);
+    });
+  }
+
+  const minusBase = Array.from(chunkedDoc);
+  const mbfirst = minusBase.shift();
+  minusBase[0] = mbfirst + minusBase[0];
+
+  for (let i= 1; i<15; i++) {
+    it(`should parse the basic document, where the chunk split is ${i} chars before the boundary`, async function () {
+      const t = Array.from(minusBase);
+      let toNext = t[0].substr(-i);
+      t[0] = t[0].substr(0,t[0].length-i);
+
+      for (let j= 1; j<t.length-1; j++) {
+        let toNext2 = t[j].substr(-i);
+        t[j] = toNext + t[j].substr(0,t[j].length-i);
+        toNext = toNext2;
+      }
+      t[t.length-1] = toNext + t[t.length-1]
+      await testBaseDocument(t);
+    });
+  }
+  it('should parse the basic document, where there is a chunk break between the "--" of a boundary', async function () {
+    const testcase = baseDoc.replace(/--separator/g, '-|-separator').split('|');
+    await testBaseDocument(testcase);
   });
   it('should parse the basic document, broken into 1 byte chunks', async function () {
     // Note: a subset of this test would be testing if a boundary is split across two chunks. This test does
