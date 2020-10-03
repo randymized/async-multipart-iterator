@@ -28,8 +28,7 @@ class PartParserWrapper {
                             // found the empty line marking the end of the header section
                             haveHeader = true;
                             cursor += 2;
-                            const headerStrings = headerlines.map(line => line.toString());
-                            yield headerStrings
+                            yield headerlines
                             yield chunk.slice(cursor);
                         }
                         else if (icrlf > cursor) {

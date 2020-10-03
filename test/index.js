@@ -149,4 +149,10 @@ describe('Multipart iterator', async function () {
     }
     await testBaseDocument(chunks);
   });
+  it('should allow accessing the raw, undecoded, buffer lines of the headers', async function () {
+    for await (let [header, iterator, rawHeader] of multipartIterator(boundary, baseDoc)) {
+      for await (let chunk of iterator) {
+      };
+    };
+  });
 });
