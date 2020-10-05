@@ -14,7 +14,7 @@ const crlf = Buffer.from("\r\n");
  * Ignores any content before the first boundary.
  * Stops parsing and ignores any content after the terminal boundary.
  */
-module.exports.parseMultipart = async function* parseMultipart(boundary, input) {
+module.exports.breakAtBoundaries = async function* breakAtBoundaries(boundary, input) {
     const fullBoundaryLength = boundary.length + 4; // add preceding "\r\n--"
     const boundbuff = Buffer.from(`\r\n--${boundary}`);
     const initialBoundbuff = Buffer.from(`--${boundary}`);
