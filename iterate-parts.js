@@ -67,7 +67,6 @@ async function* iterateParts(docPartIterator) {
     while (chunkCount) {
         const wrapper = new PartParserWrapper();
         yield wrapper.parser(docPartIterator);
-        await wrapper.parser;
         chunkCount = wrapper.chunkCount;
     }
 }
