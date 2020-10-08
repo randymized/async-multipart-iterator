@@ -22,7 +22,8 @@ module.exports.breakAtBoundaries = async function* breakAtBoundaries(boundary, i
     let prologue = true;  // ignore any content before the first boundary
     let needTail= false;
     let flush = false;
-    let remnant = Buffer.alloc(0);  // start with no remnant
+    const noRemnant = Buffer.alloc(0);
+    let remnant = noRemnant;  // start with no remnant
 
     // Try to assure that the input is an iterator over buffers.
     // Adapt a single buffer or a string to an array of buffers.
@@ -34,6 +35,7 @@ module.exports.breakAtBoundaries = async function* breakAtBoundaries(boundary, i
         if (flush) break;  // flushing out any remaining buffer after the ending boundary
 
         chunk = Buffer.concat([remnant, Buffer.isBuffer(chunk)? chunk: Buffer.from(chunk)]); // prepend any remnant from last pass
+        remnant = noRemnant
         let cursor = 0
         const end = chunk.length
         while (cursor < end) {
