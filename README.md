@@ -1,7 +1,7 @@
 # async-multipart-iterator
-Iterate the parts of a multipart document, sequentially producing a header and a body iterator for each part.
+Iterate the parts of an RFC 1528 multipart (multipart/mixed, multipart/alternative, multipart/digest, multipart/parallel) document, sequentially producing a header and a body iterator for each part.
 
-## Quickie example
+## Quick example
 
 ```js
 'use strict'
@@ -10,10 +10,9 @@ const someOutputDir = '/tmp/something';  // name of a directory in which bodies 
 const boundary = 'cd67d1a112145bdcfdce0c5839b36b53'; // the boundaries to be found in the input file
 
 const fs = require('fs');
-const {multipartIterator} = require('../multipart-iterator');
+const {multipartIterator} = require('async-multipart-iterator');
 
 async function main() {
-    //const input = fs.createReadStream('../../test-data/retsq_samples_photos-4641959_2018-09-04T11_54_13.983');
     const input = fs.createReadStream(someInputFile);
 
     let count = 0;

@@ -8,7 +8,7 @@
     "test-debug": "mocha --inspect-brk test"
   },
   "author": "",
-  "license": "UNLICENCED",
+  "license": "MIT",
   "dependencies": {},
   "devDependencies": {
     "mocha": "^8.1.3"
