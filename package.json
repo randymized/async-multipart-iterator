@@ -7,6 +7,7 @@
     "async", "RFC1528", "multipart", "multipart/mixed", "multipart/alternative", "multipart/digest", "multipart/parallel"
   ],
   "scripts": {
+    "release": "np",
     "test": "mocha test",
     "test-debug": "mocha --inspect-brk test"
   },
