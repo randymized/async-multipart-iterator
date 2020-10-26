@@ -1,10 +1,16 @@
 {
   "name": "async-multipart-iterator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Iterate over the parts of a multipart document",
   "main": "async-multipart-iterator.js",
   "keywords": [
-    "async", "RFC1528", "multipart", "multipart/mixed", "multipart/alternative", "multipart/digest", "multipart/parallel"
+    "async",
+    "RFC1528",
+    "multipart",
+    "multipart/mixed",
+    "multipart/alternative",
+    "multipart/digest",
+    "multipart/parallel"
   ],
   "scripts": {
     "release": "np",
